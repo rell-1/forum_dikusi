@@ -1,6 +1,5 @@
 const supabase = require('../config/db');
 
-// Fungsi untuk membuat thread baru
 const createThread = async (req, res) => {
   const { title, content } = req.body;
   const userId = req.user.id; 
@@ -21,7 +20,6 @@ const createThread = async (req, res) => {
   }
 };
 
-
 const getThreads = async (req, res) => {
   try {
     const { data, error } = await supabase
@@ -38,7 +36,6 @@ const getThreads = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
-
 
 const getThreadById = async (req, res) => {
   const { id } = req.params;
@@ -71,10 +68,9 @@ const getThreadById = async (req, res) => {
 
 const deleteThread = async (req, res) => {
   const { id } = req.params;
-  const userId = req.user.id; // Asumsikan Anda memiliki informasi user yang terautentikasi
+  const userId = req.user.id;
 
   try {
-    // Pertama, cek apakah thread tersebut ada dan dimiliki oleh user yang terautentikasi
     const { data: thread, error: threadError } = await supabase
       .from('threads')
       .select('*')
@@ -90,7 +86,6 @@ const deleteThread = async (req, res) => {
       return res.status(404).json({ error: 'Thread not found or you do not have permission to delete it' });
     }
 
-    // Hapus thread
     const { error: deleteError } = await supabase
       .from('threads')
       .delete()
@@ -103,7 +98,5 @@ const deleteThread = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
-
-
 
 module.exports = { createThread, getThreads, getThreadById, deleteThread };
