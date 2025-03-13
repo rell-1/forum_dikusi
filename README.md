@@ -1,3 +1,6 @@
-# forum-diskusi
-# forum_dikusi
-# forum_dikusi
+cd forum-backend
+cd src
+node index
+
+cd forum-frontend
+npm start
