@@ -28,7 +28,10 @@ const getCommentsByThreadId = async (req, res) => {
   try {
     const { data, error } = await supabase
       .from('comments')
-      .select('*')
+      .select(`
+        *,
+        users:user_id (username)
+      `)
       .eq('thread_id', threadId);
 
     if (error) {
@@ -41,4 +44,5 @@ const getCommentsByThreadId = async (req, res) => {
   }
 };
 
-module.exports = { createComment, getCommentsByThreadId };
+
+module.exports = { createComment, getCommentsByThreadId};

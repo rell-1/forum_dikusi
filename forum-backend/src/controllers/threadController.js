@@ -99,8 +99,6 @@ const deleteThread = async (req, res) => {
     if (deleteError) {
       return res.status(400).json({ error: deleteError.message });
     }
-
-    res.status(200).json({ message: 'Thread deleted successfully' });
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
   }
